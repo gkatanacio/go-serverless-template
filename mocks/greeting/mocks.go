@@ -60,15 +60,26 @@ type MockService_HelloMessage_Call struct {
 }
 
 // HelloMessage is a helper method to define mock.On call
-//   - ctx
-//   - name
+//   - ctx context.Context
+//   - name string
 func (_e *MockService_Expecter) HelloMessage(ctx interface{}, name interface{}) *MockService_HelloMessage_Call {
 	return &MockService_HelloMessage_Call{Call: _e.mock.On("HelloMessage", ctx, name)}
 }
 
 func (_c *MockService_HelloMessage_Call) Run(run func(ctx context.Context, name string)) *MockService_HelloMessage_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(context.Context), args[1].(string))
+		var arg0 context.Context
+		if args[0] != nil {
+			arg0 = args[0].(context.Context)
+		}
+		var arg1 string
+		if args[1] != nil {
+			arg1 = args[1].(string)
+		}
+		run(
+			arg0,
+			arg1,
+		)
 	})
 	return _c
 }
